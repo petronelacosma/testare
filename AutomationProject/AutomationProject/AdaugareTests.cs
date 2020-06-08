@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace AutomationProject
@@ -35,41 +34,76 @@ namespace AutomationProject
         }
 
         [TestMethod]
-        public void TEST()
+        public void Should_Change_Add_Buttons_Succesfully()
         {
-            List<string> lista_iteme = homePage.test();
-            homePage.Apasa_Buton_Cart();
-            cartPage = new CartPage(driver);
-            Assert.IsTrue(cartPage.Verificare(lista_iteme));
+            homePage.Init_Buttons();
+
+            homePage.Press_Button_Nr(1);
+            homePage.Press_Button_Nr(3);
+            homePage.Press_Button_Nr(5);
+
+            Assert.IsTrue(homePage.Button_Nr_Is_Remove(1));
+            Assert.IsTrue(homePage.Button_Nr_Is_Remove(3));
+            Assert.IsTrue(homePage.Button_Nr_Is_Remove(5));
+            Assert.IsTrue(homePage.Button_Nr_Is_Add(0));
+            Assert.IsTrue(homePage.Button_Nr_Is_Add(2));
+            Assert.IsTrue(homePage.Button_Nr_Is_Add(4));
         }
 
         [TestMethod]
-        public void Should_Add_Successfully()
+        public void Should_Change_Remove_Buttons_Succesfully()
         {
-            //homePage.ProdusClick(0);
-            //Thread.Sleep(2000);
-            driver.FindElement(By.CssSelector("button[class='btn_primary btn_inventory']")).Click();
-            driver.FindElement(By.CssSelector("button[class='btn_primary btn_inventory']")).Click();
-            driver.FindElement(By.CssSelector("button[class='btn_primary btn_inventory']")).Click();
-            driver.FindElement(By.CssSelector("button[class='btn_primary btn_inventory']")).Click();
-            driver.FindElement(By.CssSelector("button[class='btn_primary btn_inventory']")).Click();
-            driver.FindElement(By.CssSelector("button[class='btn_primary btn_inventory']")).Click();
-            Thread.Sleep(2000);
-            Assert.IsTrue(driver.FindElement(By.CssSelector("button[class='btn_secondary btn_inventory']")).Text.Equals("REMOVE"));
-            Assert.IsTrue(driver.FindElement(By.CssSelector("button[class='btn_secondary btn_inventory']")).Text.Equals("REMOVE"));
-            Assert.IsTrue(driver.FindElement(By.CssSelector("button[class='btn_secondary btn_inventory']")).Text.Equals("REMOVE"));
-            Assert.IsTrue(driver.FindElement(By.CssSelector("button[class='btn_secondary btn_inventory']")).Text.Equals("REMOVE"));
-            Assert.IsTrue(driver.FindElement(By.CssSelector("button[class='btn_secondary btn_inventory']")).Text.Equals("REMOVE"));
-            Assert.IsTrue(driver.FindElement(By.CssSelector("button[class='btn_secondary btn_inventory']")).Text.Equals("REMOVE"));
-            /*
-            homePage.Init_Dict_Btn_Add();
-            List<string> ItemNames = homePage.getItemNames();
-            homePage.Apasa_Buton_Add(ItemNames[1]);
-            homePage.Apasa_Buton_Add(ItemNames[2]);
-            homePage.Init_Dict_Btn_Remove();
-            Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(ItemNames[1]));
-            Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(ItemNames[2]));*/
+            homePage.Init_Buttons();
+
+            homePage.Press_Button_Nr(0);
+            homePage.Press_Button_Nr(3);
+            homePage.Press_Button_Nr(4);
+
+            homePage.Press_Button_Nr(3);
+            homePage.Press_Button_Nr(4);
+
+            Assert.IsTrue(homePage.Button_Nr_Is_Add(4));
+            Assert.IsTrue(homePage.Button_Nr_Is_Add(3));
+            Assert.IsTrue(homePage.Button_Nr_Is_Remove(0));
         }
+
+        [TestMethod]
+
+        public void Cart_Nr_Displayed_Correctly()
+        {
+            homePage.Init_Buttons();
+
+            homePage.Press_Button_Nr(1);
+            homePage.Press_Button_Nr(5);
+            homePage.Press_Button_Nr(2);
+
+            Assert.AreEqual(3, homePage.getNrItemCart());
+
+            homePage.Press_Button_Nr(5);
+            homePage.Press_Button_Nr(2);
+
+            Assert.AreEqual(1, homePage.getNrItemCart());
+
+        }
+
+        [TestMethod]
+        public void Correct_Items_In_Cart()
+        {
+            homePage.Init_Buttons();
+            List<string> Item_List = homePage.Add_Some_Items();
+
+            homePage.Press_Cart_Button();
+            cartPage = new CartPage(driver);
+
+            Assert.IsTrue(cartPage.Are_Same_Items(Item_List));
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            driver.Quit();
+        }
+
         /*
         [TestMethod]
         public void Should_Add_Successfully()
@@ -82,7 +116,7 @@ namespace AutomationProject
             Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(2));
             Assert.AreEqual(3, homePage.getNrItemCart());
             }
-         
+
         [TestMethod]
         public void Should_Remove_Successfully()
             {
@@ -90,13 +124,29 @@ namespace AutomationProject
             homePage.Apasa_Buton_Remove(0);
             Assert.AreEqual("ADD TO CART", homePage.getButtonAddText(1));
             }
-       */
-        [TestCleanup]
-        public void CleanUp()
-            {
-            driver.Quit();
-            }
-            
+*/
 
+        /*
+        [TestMethod]
+        public void Correct_Number_Items_In_Cart()
+            {
+            List<string> ItemNames=homePage.test();
+            homePage.Apasa_Buton_Cart();
+            cartPage = new CartPage(driver);
+            Assert.IsTrue(cartPage.Verificare(ItemNames));
+            }
+        
+        [TestMethod]
+        public void Should_Add_Successfully()
+            {
+            homePage.Init_Dict_Btn_Add(); 
+            List<string> ItemNames = homePage.getItemNames();
+            homePage.Apasa_Buton_Add(ItemNames[1]);
+            homePage.Apasa_Buton_Add(ItemNames[2]);
+            homePage.Init_Dict_Btn_Remove();
+            Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(ItemNames[1]));
+            Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(ItemNames[2]));
+            }
+            */
     }
 }

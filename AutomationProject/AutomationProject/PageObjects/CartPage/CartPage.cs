@@ -31,13 +31,13 @@ namespace AutomationProject.PageObjects.CartPage
             LstCart.FirstOrDefault(element => element.Text.Contains(itemName))?.FindElement(remove);
 
         [FindsBy(How = How.CssSelector, Using = "div[class='inventory_item_name']")]
-        private IList<IWebElement> item_names { get; set; }
+        private IList<IWebElement> Item_On_Cart_Page { get; set; }
 
-        public bool Verificare(List<string> selected_items)
+        public bool Are_Same_Items(List<string> Item_List)
         {
-            for (int i = 0; i < selected_items.Count; i++)
+            for (int i = 0; i < Item_List.Count; i++)
             {
-                if (selected_items[i] != item_names[i].Text)
+                if (Item_List[i] != Item_On_Cart_Page[i].Text)
                 {
                     return false;
                 }

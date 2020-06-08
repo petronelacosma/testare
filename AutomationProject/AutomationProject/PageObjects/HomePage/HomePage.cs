@@ -11,6 +11,7 @@ namespace AutomationProject.PageObjects.HomePage
     public class HomePage
     {
         private IWebDriver driver;
+        private IList<IWebElement> Buttons;
 
         public HomePage(IWebDriver browser)
         {
@@ -24,15 +25,20 @@ namespace AutomationProject.PageObjects.HomePage
         [FindsBy(How = How.CssSelector, Using = "button[class='btn_secondary btn_inventory']")]
         private IList<IWebElement> buttons_Remove { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "a[class='shopping_cart_link fa-layers fa-fw']")]
-        private IWebElement BtnCart{ get; set; }
+        
 
         [FindsBy(How = How.CssSelector, Using = "div[class='cart_list']")]
         private IList<IWebElement> LstCart { get; set; }
 
         // public LoggedInMenuItemControl menuItemControl => new LoggedInMenuItemControl(driver);
+        [FindsBy(How = How.CssSelector, Using = "a[class='shopping_cart_link fa-layers fa-fw']")]
+        private IWebElement BtnFinish { get; set; }
+
         [FindsBy(How = How.CssSelector, Using = "span[class='fa-layers-counter shopping_cart_badge']")]
         private IWebElement NrItemCart { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "div[class='inventory_item_name']")]
+        private IList<IWebElement> Item_Names { get; set; }
 
         //produse inventar
         [FindsBy(How = How.CssSelector, Using = "a[id='item_0_title_link']")]
@@ -60,77 +66,64 @@ namespace AutomationProject.PageObjects.HomePage
 
         public void CartPage()
         {
-            BtnCart.Click();
+            BtnFinish.Click();
         }
-        public List<string> getItemNames()
+
+
+        public void Init_Buttons()
         {
-            List<string> ItemNames = new List<string>();
-            for (int i = 0; i < item_names.Count; i++)
+            Buttons = driver.FindElements(By.XPath("//div[@class='inventory_list']//button"));
+        }
+
+        public void Press_Button_Nr(int index)
+        {
+            Buttons[index].Click();
+        }
+        public bool Button_Nr_Is_Add(int index)
+        {
+            if (Buttons[index].Text == "ADD TO CART")
             {
-                ItemNames.Add(item_names[i].Text);
+                return true;
             }
-            return ItemNames;
+            return false;
         }
 
-        public void Init_Dict_Btn_Add()
+        public bool Button_Nr_Is_Remove(int index)
         {
-            for (int i = 0; i < buttons_Add.Count; i++)
+            if (Buttons[index].Text == "REMOVE")
             {
-                dictionary_Btn_Add[item_names[i].Text] = buttons_Add[i];
+                return true;
             }
+            return false;
         }
 
-        public void Init_Dict_Btn_Remove()
+        public List<string> Add_Some_Items()
         {
-            for (int i = 0; i < buttons_Remove.Count; i++)
-            {
-                dictionary_Btn_Remove[item_names[i].Text] = buttons_Remove[i];
-                Console.WriteLine(item_names[i].Text);
-            }
+            List<string> Item_List = new List<string>();
+
+            Buttons[1].Click();
+            Buttons[2].Click();
+            Buttons[3].Click();
+            Buttons[5].Click();
+            Buttons[1].Click();
+
+            Item_List.Add(Item_Names[2].Text);
+            Item_List.Add(Item_Names[3].Text);
+            Item_List.Add(Item_Names[5].Text);
+
+            return Item_List;
         }
 
-        public List<string> test()
+        public void Press_Cart_Button()
         {
-            List<string> lista_iteme = new List<string>();
-            Init_Dict_Btn_Add();
-            dictionary_Btn_Add[item_names[1].Text].Click();
-            lista_iteme.Add(item_names[1].Text);
-            dictionary_Btn_Add[item_names[4].Text].Click();
-            lista_iteme.Add(item_names[4].Text);
-            return lista_iteme;
-        }
-        public void Apasa_Buton_Cart()
-        {
-            BtnCart.Click();
-        }
-
-        public void Apasa_Buton_Add(string ItemName)
-        {
-            dictionary_Btn_Add[ItemName].Click();
-
-        }
-
-        public void Apasa_Buton_Remove(string ItemName)
-        {
-            dictionary_Btn_Remove[ItemName].Click();
-        }
-        public string getButtonAddText(string ItemName)
-        {
-            return dictionary_Btn_Add[ItemName].Text;
-        }
-
-        public string getButtonRemoveText(string ItemName)
-        {
-            return dictionary_Btn_Remove[ItemName].Text;
+            BtnFinish.Click();
         }
 
         public int getNrItemCart()
         {
             return Int32.Parse(NrItemCart.Text);
         }
-    
-
-    public void ProdusClick(int nr)
+        public void ProdusClick(int nr)
         {
             switch(nr)
             {
