@@ -25,12 +25,9 @@ namespace AutomationProject.PageObjects.HomePage
         [FindsBy(How = How.CssSelector, Using = "button[class='btn_secondary btn_inventory']")]
         private IList<IWebElement> buttons_Remove { get; set; }
 
-        
-
         [FindsBy(How = How.CssSelector, Using = "div[class='cart_list']")]
         private IList<IWebElement> LstCart { get; set; }
 
-        // public LoggedInMenuItemControl menuItemControl => new LoggedInMenuItemControl(driver);
         [FindsBy(How = How.CssSelector, Using = "a[class='shopping_cart_link fa-layers fa-fw']")]
         private IWebElement BtnFinish { get; set; }
 
@@ -40,7 +37,6 @@ namespace AutomationProject.PageObjects.HomePage
         [FindsBy(How = How.CssSelector, Using = "div[class='inventory_item_name']")]
         private IList<IWebElement> Item_Names { get; set; }
 
-        //produse inventar
         [FindsBy(How = How.CssSelector, Using = "a[id='item_0_title_link']")]
         private IWebElement Prod0 { get; set; }
 
@@ -60,9 +56,6 @@ namespace AutomationProject.PageObjects.HomePage
         private IWebElement Prod5 { get; set; }
         [FindsBy(How = How.CssSelector, Using = "div[class='inventory_item_name']")]
         private IList<IWebElement> item_names { get; set; }
-
-        private Dictionary<string, IWebElement> dictionary_Btn_Add = new Dictionary<string, IWebElement>();
-        private Dictionary<string, IWebElement> dictionary_Btn_Remove = new Dictionary<string, IWebElement>();
 
         public void CartPage()
         {

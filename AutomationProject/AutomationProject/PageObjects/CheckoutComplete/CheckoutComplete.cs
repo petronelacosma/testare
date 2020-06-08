@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutomationProject.PageObjects.ChackoutComplete
+namespace AutomationProject.PageObjects.CheckoutComplete
 {
-    public class ChackoutComplete
+    public class CheckoutComplete
     {
         private IWebDriver driver;
 
-        public ChackoutComplete(IWebDriver browser)
+        public CheckoutComplete(IWebDriver browser)
         {
             driver = browser;
             PageFactory.InitElements(this, new RetryingElementLocator(driver, TimeSpan.FromSeconds(20)));

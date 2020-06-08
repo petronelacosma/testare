@@ -18,8 +18,6 @@ namespace AutomationProject.PageObjects.CartPage
             PageFactory.InitElements(this, new RetryingElementLocator(driver, TimeSpan.FromSeconds(20)));
         }
 
-
-
         [FindsBy(How = How.CssSelector, Using = "div[class='cart_list']")]
         private IList<IWebElement> LstCart { get; set; }
 

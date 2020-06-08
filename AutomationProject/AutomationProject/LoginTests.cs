@@ -28,19 +28,6 @@ public class LoginTests
     {
         loginPage.LoginApplication(new LoginBO());
         var homePage = new LoginPage(driver);
-        //IWebStorage webStorage = (IWebStorage)new Augmenter().augment(driver);
-        //ISessionStorage sessionStorage = webStorage.getSessionStorage();
-        //IWebStorage webStorage = (IWebStorage)driver;
-        //webStorage.getSessionStorage().clear();
-        //ISessionStorage sesh = webStorage.SessionStorage;
-        // var username = sesh.GetItem("session-username");
-        // var ProductName = sessionStorage.getItem('ProductName');
-        //Assert.IsTrue(homePage.menuItemControl.Equals("standard_user"));
-
-        // Assert.AreEqual("standard_user", username);
-
-        // Assert.IsTrue(homePage.menuItemControl.UserEmailDislyed);
-        //Assert.IsTrue(homePage.menuItemControl.UserEmailDislyed);
         Assert.IsTrue(driver.FindElement(By.Id("shopping_cart_container")).Displayed);
     }
 

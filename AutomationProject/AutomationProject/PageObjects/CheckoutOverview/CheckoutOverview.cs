@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutomationProject.PageObjects.ChackoutOverveaw
+namespace AutomationProject.PageObjects.CheckoutOverview
 {
-    public class ChackoutOverveaw
+    public class CheckoutOverview
     {
         private IWebDriver driver;
 
-        public ChackoutOverveaw(IWebDriver browser)
+        public CheckoutOverview(IWebDriver browser)
         {
             driver = browser;
             PageFactory.InitElements(this, new RetryingElementLocator(driver, TimeSpan.FromSeconds(20)));
@@ -29,10 +29,10 @@ namespace AutomationProject.PageObjects.ChackoutOverveaw
 
         public string SuccessfullyCreatedMessage => LblHeaderOverveaw1.Text;
         public string NotSuccessfullyCreatedMessage => LblHeaderOverveaw.Text;
-        public ChackoutComplete.ChackoutComplete NavigateToAddressesPage()
+        public CheckoutComplete.CheckoutComplete NavigateToAddressesPage()
         {
             BtnFinish.Click();
-            return new ChackoutComplete.ChackoutComplete(driver);
+            return new CheckoutComplete.CheckoutComplete(driver);
         }
     }
 }

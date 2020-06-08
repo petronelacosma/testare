@@ -62,15 +62,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdaugareTests.cs" />
+    <Compile Include="AddToCartTests.cs" />
     <Compile Include="CheckoutTest.cs" />
     <Compile Include="Controls\MenuItemControl.cs" />
     <Compile Include="LoginTests.cs" />
     <Compile Include="PageObjects\CartPage\CartPage.cs" />
     <Compile Include="PageObjects\CheckoutPage\CheckoutPage.cs" />
     <Compile Include="PageObjects\CheckoutPage\InputData\CheckoutPageBO.cs" />
-    <Compile Include="PageObjects\ChackoutComplete\ChackoutComplete.cs" />
-    <Compile Include="PageObjects\ChackoutOverveaw\ChackoutOverveaw.cs" />
+    <Compile Include="PageObjects\CheckoutComplete\CheckoutComplete.cs" />
+    <Compile Include="PageObjects\CheckoutOverview\CheckoutOverview.cs" />
     <Compile Include="PageObjects\HomePage\HomePage.cs" />
     <Compile Include="PageObjects\LoginPage\LoginPage.cs" />
     <Compile Include="PageObjects\LoginPage\InputData\LoginBO.cs" />
@@ -81,7 +81,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="PageObjects\ChackoutOverveaw\InputData\" />
+    <Folder Include="PageObjects\CheckoutOverview\InputData\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

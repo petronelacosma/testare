@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace AutomationProject
 {
     [TestClass]
-    public class AdaugareTests
+    public class AddToCartTests
     {
         private IWebDriver driver;
         private HomePage homePage;
@@ -104,49 +104,5 @@ namespace AutomationProject
             driver.Quit();
         }
 
-        /*
-        [TestMethod]
-        public void Should_Add_Successfully()
-            {
-            homePage.Apasa_Buton_Add(0);
-            homePage.Apasa_Buton_Add(1);
-            homePage.Apasa_Buton_Add(2);
-            Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(0));
-            Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(1));
-            Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(2));
-            Assert.AreEqual(3, homePage.getNrItemCart());
-            }
-
-        [TestMethod]
-        public void Should_Remove_Successfully()
-            {
-            homePage.Apasa_Buton_Add(1);
-            homePage.Apasa_Buton_Remove(0);
-            Assert.AreEqual("ADD TO CART", homePage.getButtonAddText(1));
-            }
-*/
-
-        /*
-        [TestMethod]
-        public void Correct_Number_Items_In_Cart()
-            {
-            List<string> ItemNames=homePage.test();
-            homePage.Apasa_Buton_Cart();
-            cartPage = new CartPage(driver);
-            Assert.IsTrue(cartPage.Verificare(ItemNames));
-            }
-        
-        [TestMethod]
-        public void Should_Add_Successfully()
-            {
-            homePage.Init_Dict_Btn_Add(); 
-            List<string> ItemNames = homePage.getItemNames();
-            homePage.Apasa_Buton_Add(ItemNames[1]);
-            homePage.Apasa_Buton_Add(ItemNames[2]);
-            homePage.Init_Dict_Btn_Remove();
-            Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(ItemNames[1]));
-            Assert.AreEqual("REMOVE", homePage.getButtonRemoveText(ItemNames[2]));
-            }
-            */
-    }
+    }      
 }

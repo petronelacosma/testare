@@ -1,8 +1,8 @@
 ﻿using AutomationProject.PageObjects.AddAddressPage;
 using AutomationProject.PageObjects.CartPage;
 using AutomationProject.PageObjects.ChackeoutPage.InputData;
-using AutomationProject.PageObjects.ChackoutComplete;
-using AutomationProject.PageObjects.ChackoutOverveaw;
+using AutomationProject.PageObjects.CheckoutComplete;
+using AutomationProject.PageObjects.CheckoutOverview;
 using AutomationProject.PageObjects.HomePage;
 using CheckoutPage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,7 +21,7 @@ namespace AutomationProject
     public class CheckoutTest
     {
         private IWebDriver driver;
-        private ChackoutComplete addCheckoutPage;
+        private CheckoutComplete addCheckoutPage;
         private CheckoutPage.CheckoutPage checkoutPage;
         [TestInitialize]
         public void SetUp()
@@ -29,24 +29,13 @@ namespace AutomationProject
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://www.saucedemo.com/");
-
-            //login
             var loginPage = new LoginPage(driver);
             loginPage.LoginApplication(new LoginBO());
-            //homepage
             var inventory = new HomePage(driver);
             inventory.CartPage();
-            //cart
             var cart = new CartPage(driver);
             cart.ClickCheckout();
-            //nu e fct in homepage care sa ma duca la cart
             checkoutPage = new CheckoutPage.CheckoutPage(driver);
-            //checkout
-            /*var checkoutPage = cart.NavigateToAddAddressPage();
-            //checkout overview
-
-            var checkoutOverview = new ChackoutOverveaw(driver);
-            addCheckoutPage = checkoutOverview.NavigateToAddressesPage();*/
         }
 
         [TestMethod]
